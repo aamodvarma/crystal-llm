@@ -292,6 +292,7 @@ def smart_tokenizer_and_embedding_resize(
     Note: This is the unoptimized version that may make your embedding size not be divisible by 64.
     """
     num_new_tokens = llama_tokenizer.add_special_tokens(special_tokens_dict)
+    print("NUM_NEW_TOKENS", num_new_tokens)
     model.resize_token_embeddings(len(llama_tokenizer))
 
     if num_new_tokens > 0:
@@ -380,14 +381,17 @@ def setup_trainer(args):
 def main(args):
     trainer = setup_trainer(args)
 
-    if args.resume_dir is not None:
-        train_result = trainer.train(resume_from_checkpoint=args.resume_dir)
-    else:
-        train_result = trainer.train()
-
-    print(train_result)
-    trainer.save_state()
-    trainer.save_model()
+    for a in datasets["train"]:
+        print(a);
+        break;
+    # if args.resume_dir is not None:
+    #     train_result = trainer.train(resume_from_checkpoint=args.resume_dir)
+    # else:
+    #     train_result = trainer.train()
+    #
+    # print(train_result)
+    # trainer.save_state()
+    # trainer.save_model()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
