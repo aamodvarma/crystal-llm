@@ -349,11 +349,11 @@ def setup_model(args, rank):
     if llama_tokenizer.unk_token is None:
         special_tokens_dict["unk_token"] = DEFAULT_UNK_TOKEN
 
-    smart_tokenizer_and_embedding_resize(
-        special_tokens_dict=special_tokens_dict,
-        llama_tokenizer=llama_tokenizer,
-        model=model,
-    )
+    # smart_tokenizer_and_embedding_resize(
+    #     special_tokens_dict=special_tokens_dict,
+    #     llama_tokenizer=llama_tokenizer,
+    #     model=model,
+    # )
 
     return model, llama_tokenizer
 
@@ -416,3 +416,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(args)
+
