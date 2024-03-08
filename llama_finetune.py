@@ -368,6 +368,10 @@ def setup_trainer(args):
         tokenizer=llama_tokenizer, 
     )
 
+    for a in datasets["train"]:
+        print(a)
+        break
+
     trainer = Trainer(
         model=model,
         args=training_args,
@@ -381,17 +385,14 @@ def setup_trainer(args):
 def main(args):
     trainer = setup_trainer(args)
 
-    for a in datasets["train"]:
-        print(a);
-        break;
-    # if args.resume_dir is not None:
-    #     train_result = trainer.train(resume_from_checkpoint=args.resume_dir)
-    # else:
-    #     train_result = trainer.train()
-    #
-    # print(train_result)
-    # trainer.save_state()
-    # trainer.save_model()
+    if args.resume_dir is not None:
+        train_result = trainer.train(resume_from_checkpoint=args.resume_dir)
+    else:
+        train_result = trainer.train()
+
+    print(train_result)
+    trainer.save_state()
+    trainer.save_model()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
